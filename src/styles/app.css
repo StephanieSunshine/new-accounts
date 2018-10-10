@@ -56,6 +56,12 @@ input {
 	border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
+@media screen and (max-width: 500px){
+	input {
+		font-size: 0.75em;
+	}
+}
+
 textarea {
 	display: block;
 	width: 100%;
@@ -80,9 +86,15 @@ textarea {
 	cursor: pointer;
 }
 
+@media screen and (max-width: 500px){
+	[type="submit"]{
+		font-size: 0.75em;
+	}
+}
+
 .message {
 	text-align: center;
-	height: 320px;
+	height: 170px;
 	max-width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -92,7 +104,7 @@ textarea {
 
 .in_progress {
 	text-align: center;
-	height: 320px;
+	height: 170px;
 	max-width: 100%;
 	display: flex;
 	flex-direction: row;

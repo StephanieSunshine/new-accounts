@@ -14,20 +14,20 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.get('/api/v1/new_accounts', (req, res, next) => {
-	res.set('Content-Type', 'text/json');
-	NewAccountController.getNewAccounts().then(items => {
-		if(!items){
-			return res.status(404).send('error, new accts not found');
-		}
-		res.json(items.map(acct => {
-			return {
-				email: acct.email,
-				publicKey: acct.publicKey
-			};
-		}));
-	}).catch(err => next(err));
-});
+// app.get('/api/v1/new_accounts', (req, res, next) => {
+// 	res.set('Content-Type', 'text/json');
+// 	NewAccountController.getNewAccounts().then(items => {
+// 		if(!items){
+// 			return res.status(404).send('error, new accts not found');
+// 		}
+// 		res.json(items.map(acct => {
+// 			return {
+// 				email: acct.email,
+// 				publicKey: acct.publicKey
+// 			};
+// 		}));
+// 	}).catch(err => next(err));
+// });
 
 app.post('/api/v1/new_accounts/create', (req, res, next) => {
 	res.set('Content-Type', 'text/json');
