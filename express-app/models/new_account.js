@@ -10,8 +10,7 @@ conn.on('error', console.error.bind(console, 'connection error'));
 
 const newAccountSchema = mongoose.Schema({
 	email: {type: String, required: true},
-	publicKey: {type: String, required: true},
-	reason: {type: String, required: true}
+	publicKey: {type: String, required: true}
 });
 
 module.exports = mongoose.model('NewAccount', newAccountSchema);

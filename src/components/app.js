@@ -15,13 +15,11 @@ export default class App extends Component {
 		this.state = {
 			email: '',
 			publicKey: '',
-			reason: '',
 			submissionState: NOT_SUBMITTED
 		};
 
 		this.handleChangeEmail = this.handleChangeEmail.bind(this);
 		this.handlePublicKeyChange = this.handlePublicKeyChange.bind(this);
-		this.handleReasonChange = this.handleReasonChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -33,18 +31,13 @@ export default class App extends Component {
 		this.setState({publicKey: e.target.value});
 	}
 
-	handleReasonChange(e){
-		this.setState({reason: e.target.value});
-	}
-
 	handleSubmit(e){
 		e.preventDefault();
 
 		//should have better vadation, but ok
 		if(
 			!this.state.email ||
-			!this.state.publicKey ||
-			!this.state.reason
+			!this.state.publicKey
 		){
 			alert('all inputs are required');
 			this.setState({submissionState: NOT_SUBMITTED});
@@ -55,8 +48,7 @@ export default class App extends Component {
 		const attemptSubmission = () => {
 			const fields = {
 				email: this.state.email.trim(),
-				publicKey: this.state.publicKey.trim(),
-				reason: this.state.reason.trim()
+				publicKey: this.state.publicKey.trim()
 			};
 
 			axios.post('/api/v1/new_accounts/create', fields)
@@ -83,9 +75,18 @@ export default class App extends Component {
 		const theForm = () => {
 			return (
 				<form onSubmit={this.handleSubmit}>
-					<input type='email' required value={this.state.email} placeholder='email (required)' onChange={this.handleChangeEmail} />
-					<input type='text' required value={this.state.publicKey} placeholder='public key (required)' onChange={this.handlePublicKeyChange} />
-					<textarea required value={this.state.reason} placeholder='reason for new account (required)' onChange={this.handleReasonChange} />
+					<input
+						type='email'
+						required 
+						value={this.state.email}
+						placeholder='Your community rewards signup email (required)' 
+						onChange={this.handleChangeEmail} />
+					<input
+						type='text'
+						required
+						value={this.state.publicKey}
+						placeholder='Newly generated Telos/EOS public key (required)'
+						onChange={this.handlePublicKeyChange} />
 					<button type='submit'>Submit</button>
  				</form>
 			);

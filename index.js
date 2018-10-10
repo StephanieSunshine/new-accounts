@@ -23,8 +23,7 @@ app.get('/api/v1/new_accounts', (req, res, next) => {
 		res.json(items.map(acct => {
 			return {
 				email: acct.email,
-				publicKey: acct.publicKey,
-				reason: acct.reason
+				publicKey: acct.publicKey
 			};
 		}));
 	}).catch(err => next(err));
@@ -32,16 +31,14 @@ app.get('/api/v1/new_accounts', (req, res, next) => {
 
 app.post('/api/v1/new_accounts/create', (req, res, next) => {
 	res.set('Content-Type', 'text/json');
-	const {email, publicKey, reason} = req.body;
-	if(!email || !publicKey || !reason) return res.status(500).send('missing and input');
+	const {email, publicKey} = req.body;
+	if(!email || !publicKey) return res.status(500).send('missing and input');
 	NewAccountController.addNewAccount({
 		email: email,
-		publicKey: publicKey,
-		reason: reason
+		publicKey: publicKey
 	}).then(newAcct => res.json({
 		email: newAcct.email,
-		publicKey: newAcct.publicKey,
-		reason: newAcct.reason
+		publicKey: newAcct.publicKey
 	}))
 	.catch(err => next(err));
 });
