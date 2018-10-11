@@ -1,0 +1,17 @@
+version: "2"
+services:
+  app:
+    container_name: new-accounts-server
+    restart: always
+    build: .
+    ports:
+            - "127.0.0.1:3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: new-accounts-db
+    image: mongo
+    volumes:
+      - /opt/new-accounts-db-data:/data/db
+    ports:
+      - "27017"
